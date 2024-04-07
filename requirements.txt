@@ -1,0 +1,14 @@
+numpy
+torch
+torchvision
+doy==1.9.2
+gym[atari]==0.23.1
+tensordict
+funcy
+tqdm
+omegaconf
+wandb
+matplotlib
+rich
+torchinfo
+procgen
