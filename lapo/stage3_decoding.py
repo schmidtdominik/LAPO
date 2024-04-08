@@ -45,7 +45,7 @@ idm.eval()
 policy.policy_head_sl = policy.policy_head
 policy.policy_head_rl = nn.Linear(
     policy.policy_head_sl.in_features, cfg.model.ta_dim
-).cuda()
+).to(config.DEVICE)
 # init rl path to 0 output
 with torch.no_grad():
     policy.policy_head_rl.weight[:] = 0
@@ -54,7 +54,7 @@ with torch.no_grad():
 policy.fc_rl = policy.fc
 policy.fc_sl = nn.Sequential(
     nn.Linear(policy.fc.in_features, policy.fc.out_features), nn.ReLU()
-).cuda()
+).to(config.DEVICE)
 policy.fc_sl[0].load_state_dict(policy.fc.state_dict())
 
 # disable grad on sl params (those are frozen, only decoder is trained via SL)

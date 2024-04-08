@@ -24,7 +24,7 @@ sweep_name=$(python -c "import doy; print(doy.random_proquint(2))")
 for ind in {0..15}; do
 	# generate a random experiment name that's the same across stages 1-3
 	exp_name="${ind}_${sweep_name}"
-	python stage1_idm.py env_name="${tasks[${ind}]}" exp_name="${exp_name}"
-	python stage2_bc.py env_name="${tasks[${ind}]}" exp_name="${exp_name}"
+	python stage1_idm.py env_name="${tasks[${ind}]}" exp_name="${exp_name}" &&
+	python stage2_bc.py env_name="${tasks[${ind}]}" exp_name="${exp_name}" &&
 	python stage3_decoding.py env_name="${tasks[${ind}]}" exp_name="${exp_name}"
 done

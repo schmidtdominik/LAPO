@@ -15,7 +15,7 @@ def obs_to_img(obs: Tensor) -> Tensor:
     return ((obs.permute(1, 2, 0) + 0.5) * 255).to(torch.uint8).numpy(force=True)
 
 
-def create_decoder(in_dim, out_dim, device="cuda", hidden_sizes=(128, 128)):
+def create_decoder(in_dim, out_dim, device=config.DEVICE, hidden_sizes=(128, 128)):
     decoder = []
     in_size = h = in_dim
     for h in hidden_sizes:
@@ -38,14 +38,14 @@ def create_dynamics_models(
         (idm_in_depth, 64, 64),
         model_cfg.la_dim,
         model_cfg.idm_impala_scale,
-    ).cuda()
+    ).to(config.DEVICE)
 
     wm = WorldModel(
         model_cfg.la_dim,
         in_depth=wm_in_depth,
         out_depth=wm_out_depth,
         base_size=model_cfg.wm_scale,
-    ).cuda()
+    ).to(config.DEVICE)
 
     if state_dicts is not None:
         idm.load_state_dict(state_dicts["idm"])
@@ -65,7 +65,7 @@ def create_policy(
         (policy_in_depth, 64, 64),
         action_dim,
         model_cfg.policy_impala_scale,
-    ).cuda()
+    ).to(config.DEVICE)
 
     if state_dict is not None:
         policy.load_state_dict(state_dict, strict=strict_loading)
@@ -75,7 +75,7 @@ def create_policy(
 
 def eval_latent_repr(labeled_data: data_loader.DataStager, idm: IDM):
     batch = labeled_data.td_unfolded[:131072]
-    actions = idm.label_chunked(batch).select("ta", "la").cuda()
+    actions = idm.label_chunked(batch).select("ta", "la").to(config.DEVICE)
     return train_decoder(data=actions)
 
 

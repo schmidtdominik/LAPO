@@ -6,7 +6,7 @@ import doy
 import numpy as np
 import paths
 import torch
-from config import ADD_TIME_HORIZON
+from config import ADD_TIME_HORIZON, DEVICE
 from tensordict import TensorDict, TensorDictBase
 from torch.utils.data import DataLoader
 
@@ -25,7 +25,7 @@ def _create_tensordict(length: int, obs_depth) -> TensorDict:
             "values": torch.zeros(length),
         },
         batch_size=length,
-        device="cpu",
+        device=DEVICE,
     )
 
 
@@ -83,7 +83,7 @@ class DataStager:
     def get_iter(
         self,
         batch_size: int,
-        device="cuda",
+        device=DEVICE,
         shuffle=True,
         drop_last=True,
     ) -> Generator[TensorDict, None, None]:

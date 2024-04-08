@@ -401,7 +401,7 @@ class IDM(nn.Module):
     ) -> TensorDict:
 
         def _label(batch: TensorDict):
-            return self(data_loader.normalize_obs(batch["obs"].cuda()))[0].to(
+            return self(data_loader.normalize_obs(batch["obs"].to(config.DEVICE)))[0].to(
                 batch.device
             )
 

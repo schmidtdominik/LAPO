@@ -209,7 +209,7 @@ def train(
     post_update_hook=lambda *_: None,
     action_selection_hook=None,
 ):
-    device = "cuda"
+    device = config.DEVICE
 
     buf = create_buffer(
         rl_cfg.num_steps,

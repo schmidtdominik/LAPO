@@ -1,5 +1,7 @@
 from pathlib import Path
 
+MAX_DATA_CHUNKS = 80
+
 storage_path = Path(".")
 _expert_data_path = storage_path / "expert_data"
 _experiment_results_path = storage_path / "exp_results"
@@ -12,7 +14,7 @@ assert (
 def get_expert_data(env_name: str, test: bool) -> list[Path]:
     test_flag = "test" if test else "train"
     task_data_path = _expert_data_path / env_name / test_flag
-    return sorted(task_data_path.iterdir(), key=lambda x: int(x.stem))
+    return sorted(task_data_path.iterdir(), key=lambda x: int(x.stem))[:MAX_DATA_CHUNKS]
 
 
 def get_experiment_dir(exp_name):

@@ -6,10 +6,11 @@ import env_utils
 import rich
 from omegaconf import DictConfig, OmegaConf
 from rich.syntax import Syntax
-
+import torch
 import wandb
 
 ADD_TIME_HORIZON = 1
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 """ 
 The actual config is in config.yaml, these dataclasses are just for validation and type hints.
@@ -172,6 +173,7 @@ def wandb_init(
         save_code=True,
         name=run_name,
         id=run_name,
+        anonymous="allow",
     )
 
     return run, doy.Logger(use_wandb=wandb_enabled)
