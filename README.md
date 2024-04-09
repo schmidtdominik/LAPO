@@ -12,15 +12,15 @@
 
 Pre-training large models on vast amounts of web data has proven to be an effective approach for obtaining powerful, general models in domains such as language and vision. However, this paradigm has not yet taken hold in reinforcement learning. This is because videos, the most abundant form of embodied behavioral data on the web, lack the action labels required by existing methods for imitating behavior from demonstrations. We introduce **Latent Action Policies** (LAPO), a method for recovering latent action information—and thereby latent-action policies, world models, and inverse dynamics models—purely from videos. LAPO is the first method able to recover the structure of the true action space just from observed dynamics, even in challenging procedurally-generated environments. LAPO enables training latent-action policies that can be rapidly fine-tuned into expert-level policies, either offline using a small action-labeled dataset, or online with rewards. LAPO takes a first step towards pre-training powerful, generalist policies and world models on the vast amounts of videos readily available on the web.
 
-![Stage 1: Training an inverse dynamics model (IDM) via a world model (WM)](https://github.com/schmidtdominik/LAPO/assets/8918572/7f43d290-e0d1-4624-881e-ad5cab082e7f)
+![Stage 1: Training an inverse dynamics model (IDM) via a world model (WM)](https://github.com/schmidtdominik/LAPO/assets/8918572/d45b1c53-9fb8-431d-85cf-a79468598799)
 
 In stage 1, LAPO trains a _latent inverse dynamics model_ (IDM) to predict latent actions through a joint optimization process with a _latent world model_. As illustrated above, the world model needs to use the past observation + the latent action to predict the future observation. This results in a disentangled representation that captures state transition information in a highly-compressed manner.
 
-![Stage 2: Behavior cloning a latent policy (π)](https://github.com/schmidtdominik/LAPO/assets/8918572/752155f3-2def-4276-8f63-f5a1003c36b8)
+![Stage 2: Behavior cloning a latent policy (π)](https://github.com/schmidtdominik/LAPO/assets/8918572/84b9d811-e1b2-4d0c-9682-b9a6be0f0d5a)
 
 In stage 2, LAPO trains a _latent action policy_ that imitates the latent actions predicted by the IDM. This results in an expert-level policy that produces actions in the latent space rather than the true action space.
 
-![Stage 3: Decoding a latent policy (π)](https://github.com/schmidtdominik/LAPO/assets/8918572/576ad776-f5f7-4807-b731-6736efa171d9)
+![Stage 3: Decoding a latent policy (π)](https://github.com/schmidtdominik/LAPO/assets/8918572/09469ace-cf6b-48c5-8fdf-e57b6e0d27b8)
 
 In stage 3, the latent action policy is decoded to the true action space, either offline using a small action-labeled dataset, or online
 through interaction with the environment. The diagram above is simplified—please see the paper and code for details.
