@@ -25,7 +25,7 @@ def _create_tensordict(length: int, obs_depth) -> TensorDict:
             "values": torch.zeros(length),
         },
         batch_size=length,
-        device=DEVICE,
+        device="cpu",
     )
 
 
