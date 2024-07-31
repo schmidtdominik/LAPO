@@ -1,7 +1,6 @@
 ## Code for the ICLR 2024 Spotlight paper [“Learning to Act without Actions”](https://arxiv.org/abs/2312.10812)
 
-![LAPO: Latent Action Policies](videos_and_figures/lapo.png)
-
+![LAPO: Latent Action Policies](https://github.com/user-attachments/assets/8209e014-0aac-4eaa-acfd-547e83eeae41)
 
 <p align="center"><b>
   <a href="https://arxiv.org/abs/2312.10812" target="_blank">Paper (arXiv)</a> •
